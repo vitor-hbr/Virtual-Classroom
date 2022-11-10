@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2397442607263960660}
   - component: {fileID: 305154393657765402}
   - component: {fileID: 6060945936991099993}
+  - component: {fileID: 779440139}
   m_Layer: 0
-  m_Name: Ponta
+  m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719692692108807345}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0.030225977, z: 0}
-  m_LocalScale: {x: 33.5, y: 33.5, z: 158.10059}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.00000011920926}
+  m_LocalPosition: {x: -0.0005, y: 0.0009999875, z: -0.09771114}
+  m_LocalScale: {x: 1.6750001, y: 1.6750002, z: 7.9050303}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5234902557525458076}
-  m_RootOrder: 1
+  m_Father: {fileID: 8779825760664447601}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &305154393657765402
 MeshFilter:
@@ -84,6 +85,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &779440139
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719692692108807345}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7817551918945495364, guid: 8b827bd735871d048af6061951ecccfc, type: 3}
 --- !u!1 &4894793286547858982
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5234902557525458076}
+  - component: {fileID: 214168849}
   m_Layer: 0
   m_Name: Pen
   m_TagString: Untagged
@@ -113,10 +129,25 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8573026986513158477}
-  - {fileID: 2397442607263960660}
+  - {fileID: 8779825760664447601}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &214168849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894793286547858982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e4a7d853205b85448aeb521e413f49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _markerTipHolder: {fileID: 8779825760664447601}
+  _markerTip: {fileID: 2397442607263960660}
+  _tipSize: 10
 --- !u!1 &5187388538087325471
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,3 +232,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6513056626461222186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8779825760664447601}
+  m_Layer: 0
+  m_Name: PointHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8779825760664447601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513056626461222186}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.01, y: -1.924, z: -0.02}
+  m_LocalScale: {x: 20, y: 19.999994, z: 19.999994}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2397442607263960660}
+  m_Father: {fileID: 5234902557525458076}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
