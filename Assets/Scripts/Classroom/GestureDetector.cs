@@ -6,24 +6,24 @@ using UnityEngine.Events;
 [System.Serializable]
 public struct Gesture
 {
-    public string name;
+    public GestureObject name;
     public List<Vector3> fingerData;
-    public UnityEvent onRecognized;
-    public UnityEvent onNotRecognized;
 }
 
 public class GestureDetector : MonoBehaviour
 {
+    public GestureHandler gestureHandler;
     public OVRSkeleton skeleton;
     public List<Gesture> gestures;
     public List<OVRBone> fingerBones;
     public bool debugMode = false;
-    public float gestureThreshold = 0.142f;
+    public float gestureThreshold = 0.07f;
     private bool _gotBones = false;
-    private bool _executedGesture = false;
-
+    private GestureObject _executingGesture = GestureObject.undefined;
+    private Hand _hand;
     void Start()
     {
+        _hand = gameObject.name.Split('-')[0] == "Left" ? Hand.Left : Hand.Right;
         StartCoroutine(getBones());
     }
     void Update()
@@ -37,15 +37,17 @@ public class GestureDetector : MonoBehaviour
             }
             Gesture currentGesture = checkForGesture();
 
-            if (currentGesture.name != null)
+            if (currentGesture.name != GestureObject.undefined)
             {
-                currentGesture.onRecognized?.Invoke();
-                _executedGesture = true;
+                if (_executingGesture == currentGesture.name) return;
+
+                gestureHandler.SpawnObject(currentGesture.name, _hand);
+                _executingGesture = currentGesture.name;
             }
             else
             {
-                currentGesture.onNotRecognized?.Invoke();
-                _executedGesture = false;
+                gestureHandler.RemoveObject(currentGesture.name, _hand);
+                _executingGesture = GestureObject.undefined;
             }
         }
     }
@@ -58,7 +60,7 @@ public class GestureDetector : MonoBehaviour
     void saveGesture()
     {
         Gesture newGesture = new Gesture();
-        newGesture.name = "New Gesture";
+        newGesture.name = GestureObject.undefined;
         newGesture.fingerData = new List<Vector3>();
         foreach (OVRBone finger in fingerBones)
         {
@@ -84,6 +86,11 @@ public class GestureDetector : MonoBehaviour
                 lowestMagnitude = totalMagnitude;
                 closestMatch = gesture;
             }
+        }
+        if (debugMode) print("Closest Match: " + closestMatch.name + " with magnitude: " + lowestMagnitude);
+        if (lowestMagnitude == gestureThreshold)
+        {
+            closestMatch.name = GestureObject.undefined;
         }
         return closestMatch;
     }

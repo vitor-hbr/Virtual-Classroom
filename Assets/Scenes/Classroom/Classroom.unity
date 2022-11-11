@@ -330,6 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whiteboardTexture: {fileID: 0}
   whiteboardSize: {x: 6272, y: 2048}
+  boardColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!64 &142494123
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -402,7 +403,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142494121}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.0071134567, y: 0, z: 0.0011320758}
+  m_LocalPosition: {x: -6.638, y: 0, z: 0.00113}
   m_LocalScale: {x: 0.0019071137, y: 1, z: 0.0016}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -441,7 +442,7 @@ Transform:
   - {fileID: 854921219}
   - {fileID: 407274672}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &161741990
 MonoBehaviour:
@@ -455,6 +456,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5d1899933782246b60fc7c162bfb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _leftHand: {fileID: 1317164993}
+  _rightHand: {fileID: 1733141862}
+  _pen: {fileID: 4894793286547858982, guid: 1aeeb91bef186ce4d98c4a617b744635, type: 3}
+  _eraser: {fileID: 3640359814957058340, guid: 9f95751a719ce5c46b7f455d063b0e04, type: 3}
 --- !u!1 &407274671
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,7 +471,7 @@ GameObject:
   - component: {fileID: 407274672}
   - component: {fileID: 407274673}
   m_Layer: 0
-  m_Name: RightHand
+  m_Name: Right-Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -499,53 +504,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8692b25feceb1041bb77f19a404cbf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gestureHandler: {fileID: 161741990}
   skeleton: {fileID: 1673124555}
   gestures:
-  - name: pen
-    fingerData:
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: -0.020069022, y: -0.011553993, z: -0.010497007}
-    - {x: -0.035958383, y: -0.019157734, z: -0.028028456}
-    - {x: -0.057641182, y: -0.043092865, z: -0.031777285}
-    - {x: -0.08318585, y: -0.0645375, z: -0.037215088}
-    - {x: -0.09599628, y: -0.007316428, z: -0.023550704}
-    - {x: -0.119533174, y: -0.03705499, z: -0.023880988}
-    - {x: -0.12685157, y: -0.060214806, z: -0.023026358}
-    - {x: -0.09564657, y: -0.0025431628, z: -0.0017258949}
-    - {x: -0.1225125, y: -0.035977215, z: 0.00003854237}
-    - {x: -0.12565012, y: -0.06334699, z: -0.00013194916}
-    - {x: -0.088693775, y: -0.006529311, z: 0.017465245}
-    - {x: -0.10192893, y: -0.043210447, z: 0.01759721}
-    - {x: -0.08882221, y: -0.06527311, z: 0.010697996}
-    - {x: -0.034073576, y: -0.009419821, z: 0.022998556}
-    - {x: -0.07789582, y: -0.013691166, z: 0.035054024}
-    - {x: -0.078797586, y: -0.043326814, z: 0.027013073}
-    - {x: -0.06403399, y: -0.05258088, z: 0.016575256}
-    - {x: -0.09980685, y: -0.08201101, z: -0.042177707}
-    - {x: -0.13594657, y: -0.08056229, z: -0.0209006}
-    - {x: -0.12769282, y: -0.08825603, z: -0.000098701654}
-    - {x: -0.07124205, y: -0.079574324, z: 0.0017077664}
-    - {x: -0.046637494, y: -0.053425737, z: 0.0032044926}
-    onRecognized:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 161741990}
-          m_TargetAssemblyTypeName: GestureHandler, Assembly-CSharp
-          m_MethodName: GetPen
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    onNotRecognized:
-      m_PersistentCalls:
-        m_Calls: []
-  - name: eraser
+  - name: 0
     fingerData:
     - {x: 0, y: 0, z: 0}
     - {x: 0, y: 0, z: 0}
@@ -571,14 +533,34 @@ MonoBehaviour:
     - {x: -0.19034864, y: -0.0064845313, z: 0.0051603634}
     - {x: -0.17851946, y: -0.004278339, z: 0.018134322}
     - {x: -0.1503549, y: -0.0067303125, z: 0.03388668}
-    onRecognized:
-      m_PersistentCalls:
-        m_Calls: []
-    onNotRecognized:
-      m_PersistentCalls:
-        m_Calls: []
+  - name: 1
+    fingerData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: -0.020068984, y: -0.011554003, z: -0.0104969945}
+    - {x: -0.03595843, y: -0.019157713, z: -0.028028496}
+    - {x: -0.05861188, y: -0.042325012, z: -0.030709298}
+    - {x: -0.08524408, y: -0.062859565, z: -0.034030087}
+    - {x: -0.09599622, y: -0.0073164674, z: -0.023550665}
+    - {x: -0.12244451, y: -0.03448573, z: -0.02265773}
+    - {x: -0.12801115, y: -0.05810983, z: -0.021400403}
+    - {x: -0.09564661, y: -0.0025431758, z: -0.0017258825}
+    - {x: -0.1272156, y: -0.031630807, z: -0.0015375251}
+    - {x: -0.12657864, y: -0.059163947, z: -0.0022432979}
+    - {x: -0.08869378, y: -0.0065293172, z: 0.017465252}
+    - {x: -0.12070138, y: -0.028735422, z: 0.019225681}
+    - {x: -0.12506635, y: -0.05472716, z: 0.015831409}
+    - {x: -0.034073565, y: -0.009419827, z: 0.022998577}
+    - {x: -0.077895865, y: -0.013691179, z: 0.03505404}
+    - {x: -0.10371631, y: -0.030218748, z: 0.03702479}
+    - {x: -0.10985024, y: -0.04925975, z: 0.0335081}
+    - {x: -0.10076885, y: -0.0801236, z: -0.042224187}
+    - {x: -0.1330484, y: -0.07976761, z: -0.018787941}
+    - {x: -0.1210748, y: -0.083523735, z: -0.0032147872}
+    - {x: -0.122706436, y: -0.07835569, z: 0.010305405}
+    - {x: -0.112341516, y: -0.06953934, z: 0.025466958}
   debugMode: 1
-  gestureThreshold: 0.142
+  gestureThreshold: 0.0707
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,75 +676,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
---- !u!1001 &821636513
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4894793286547858982, guid: 1aeeb91bef186ce4d98c4a617b744635,
-        type: 3}
-      propertyPath: m_Name
-      value: Pen
-      objectReference: {fileID: 0}
-    - target: {fileID: 5234902557525458076, guid: 1aeeb91bef186ce4d98c4a617b744635,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5234902557525458076, guid: 1aeeb91bef186ce4d98c4a617b744635,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5234902557525458076, guid: 1aeeb91bef186ce4d98c4a617b744635,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.731
-      objectReference: {fileID: 0}
-    - target: {fileID: 5234902557525458076, guid: 1aeeb91bef186ce4d98c4a617b744635,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 7.2395
-      objectReference: {fileID: 0}
-    - target: {fileID: 5234902557525458076, guid: 1aeeb91bef186ce4d98c4a617b744635,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 5234902557525458076, guid: 1aeeb91bef186ce4d98c4a617b744635,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 5234902557525458076, guid: 1aeeb91bef186ce4d98c4a617b744635,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5234902557525458076, guid: 1aeeb91bef186ce4d98c4a617b744635,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5234902557525458076, guid: 1aeeb91bef186ce4d98c4a617b744635,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5234902557525458076, guid: 1aeeb91bef186ce4d98c4a617b744635,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5234902557525458076, guid: 1aeeb91bef186ce4d98c4a617b744635,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1aeeb91bef186ce4d98c4a617b744635, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,12 +736,12 @@ GameObject:
   - component: {fileID: 854921219}
   - component: {fileID: 854921220}
   m_Layer: 0
-  m_Name: LeftHand
+  m_Name: Left-Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &854921219
 Transform:
   m_ObjectHideFlags: 0
@@ -856,9 +769,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8692b25feceb1041bb77f19a404cbf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gestureHandler: {fileID: 161741990}
   skeleton: {fileID: 1317164992}
   gestures:
-  - name: pen
+  - name: 1
     fingerData:
     - {x: 0, y: 0, z: 0}
     - {x: 0, y: 0, z: 0}
@@ -884,13 +798,7 @@ MonoBehaviour:
     - {x: 0.10821869, y: 0.08151532, z: 0.0031862715}
     - {x: 0.089588545, y: 0.07568247, z: -0.0058747297}
     - {x: 0.07787525, y: 0.06688509, z: -0.01415213}
-    onRecognized:
-      m_PersistentCalls:
-        m_Calls: []
-    onNotRecognized:
-      m_PersistentCalls:
-        m_Calls: []
-  - name: eraser
+  - name: 0
     fingerData:
     - {x: 0, y: 0, z: 0}
     - {x: 0, y: 0, z: 0}
@@ -916,14 +824,8 @@ MonoBehaviour:
     - {x: 0.18996318, y: -0.0023361275, z: -0.008978743}
     - {x: 0.17811719, y: -0.001330515, z: -0.021412909}
     - {x: 0.15031077, y: 0.00630372, z: -0.03651573}
-    onRecognized:
-      m_PersistentCalls:
-        m_Calls: []
-    onNotRecognized:
-      m_PersistentCalls:
-        m_Calls: []
   debugMode: 0
-  gestureThreshold: 0.142
+  gestureThreshold: 0.0707
 --- !u!1001 &1268968740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1496,6 +1398,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2609c54f376cffc4da1ab9401cc1a36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1317164993 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2167015672107753186, guid: f39a9d103c4129b42a53567f6cd8356a,
+    type: 3}
+  m_PrefabInstance: {fileID: 55137763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1673124555 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2734225618138098454, guid: f39a9d103c4129b42a53567f6cd8356a,
@@ -1542,6 +1450,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1733141862 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2623697810599725914, guid: f39a9d103c4129b42a53567f6cd8356a,
+    type: 3}
+  m_PrefabInstance: {fileID: 55137763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1832169094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7724286122740395061, guid: 88a72c6cf30abeb4a8a16815fffc355e,
@@ -1616,3 +1530,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2010410636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7192818547691322732, guid: f39a9d103c4129b42a53567f6cd8356a,
+    type: 3}
+  m_PrefabInstance: {fileID: 55137763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2010410638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010410636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
