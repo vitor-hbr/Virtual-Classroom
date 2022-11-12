@@ -516,6 +516,9 @@ MonoBehaviour:
   - {fileID: 322659922033099245}
   - {fileID: 316186050126670890}
   - {fileID: 5453824490241295886}
+  - {fileID: 854921220}
+  - {fileID: 407274673}
+  - {fileID: 161741990}
 --- !u!1 &4740235946236144068
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,7 +917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skeletonType: 0
-  _updateRootPose: 0
+  _updateRootPose: 1
   _updateRootScale: 1
   _enablePhysicsCapsules: 0
   _applyBoneTranslations: 1

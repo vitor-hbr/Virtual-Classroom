@@ -38,7 +38,6 @@ public class GestureDetector : MonoBehaviour
             }
             Gesture currentGesture = checkForGesture();
 
-            print(currentGesture.name);
             if (currentGesture.name != GestureObject.undefined)
             {
                 if (_executingGesture == currentGesture.name) return;

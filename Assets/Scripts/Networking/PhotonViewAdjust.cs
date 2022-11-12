@@ -11,12 +11,13 @@ public class PhotonViewAdjust : MonoBehaviour
     {
         if (!PhotonNetwork.IsMasterClient)
         {
-            disableComponents();
+            disableNonMasterItems();
         }
     }
 
-    void disableComponents()
+    void disableNonMasterItems()
     {
+        print("Disabling non master items");
         foreach (Behaviour component in ComponentsToDisable)
         {
             component.enabled = false;
