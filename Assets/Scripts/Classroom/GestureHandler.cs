@@ -32,8 +32,7 @@ public class GestureHandler : MonoBehaviour
     private Vector3 penRightCorrectPosition = new Vector3(-0.104f, -0.0296f, -0.0252f);
     void Start()
     {
-        print("PhotonNetwork.IsMasterClient: " + PhotonNetwork.IsMasterClient);
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient && photonView.IsMine)
         {
             Pens = new List<GameObject>();
             Erasers = new List<GameObject>();
@@ -48,36 +47,40 @@ public class GestureHandler : MonoBehaviour
 
     void Update()
     {
-        if (_leftObject == GestureObject.pen)
+        if (PhotonNetwork.IsMasterClient)
         {
-            Pens[0].transform.position = _leftHand.position + penLeftCorrectPosition;
-            Pens[0].transform.rotation = _leftHand.rotation;
-            Pens[0].transform.Rotate(180f, 0f, 0f, Space.Self);
-        }
-        else if (_leftObject == GestureObject.eraser)
-        {
-            Erasers[0].transform.position = _leftHand.position;
-        }
-        else
-        {
-            Pens[0].transform.position = _hiddenPosition;
-            Erasers[0].transform.position = _hiddenPosition;
+            if (_leftObject == GestureObject.pen)
+            {
+                Pens[0].transform.position = _leftHand.position + penLeftCorrectPosition;
+                Pens[0].transform.rotation = _leftHand.rotation;
+                Pens[0].transform.Rotate(180f, 0f, 0f, Space.Self);
+            }
+            else if (_leftObject == GestureObject.eraser)
+            {
+                Erasers[0].transform.position = _leftHand.position;
+            }
+            else
+            {
+                Pens[0].transform.position = _hiddenPosition;
+                Erasers[0].transform.position = _hiddenPosition;
+            }
+
+            if (_rightObject == GestureObject.pen)
+            {
+                Pens[1].transform.position = _rightHand.position + penRightCorrectPosition;
+                Pens[1].transform.rotation = _rightHand.rotation;
+            }
+            else if (_rightObject == GestureObject.eraser)
+            {
+                Erasers[1].transform.position = _rightHand.position;
+            }
+            else
+            {
+                Pens[1].transform.position = _hiddenPosition;
+                Erasers[1].transform.position = _hiddenPosition;
+            }
         }
 
-        if (_rightObject == GestureObject.pen)
-        {
-            Pens[1].transform.position = _rightHand.position + penRightCorrectPosition;
-            Pens[1].transform.rotation = _rightHand.rotation;
-        }
-        else if (_rightObject == GestureObject.eraser)
-        {
-            Erasers[1].transform.position = _rightHand.position;
-        }
-        else
-        {
-            Pens[1].transform.position = _hiddenPosition;
-            Erasers[1].transform.position = _hiddenPosition;
-        }
     }
 
     public void PlaceObjectOnHand(GestureObject gestureObject, Hand hand)

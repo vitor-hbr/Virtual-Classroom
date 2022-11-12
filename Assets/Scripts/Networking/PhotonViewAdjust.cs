@@ -8,7 +8,7 @@ public class PhotonViewAdjust : MonoBehaviour
     [SerializeField] private PhotonView photonView;
     public List<GameObject> GameObjectsToDisable;
     public List<Behaviour> ComponentsToDisable;
-    void Start()
+    void Awake()
     {
         if (!photonView.IsMine)
         {
