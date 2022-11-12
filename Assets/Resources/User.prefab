@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5d1899933782246b60fc7c162bfb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 8776869407179503517}
   _leftHand: {fileID: 7258702957567260176}
   _rightHand: {fileID: 6829675737683076008}
   _penPrefab: {fileID: 4894793286547858982, guid: 1aeeb91bef186ce4d98c4a617b744635,
@@ -509,6 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b78753d4cfcb3418d3bcc23a20569e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 8776869407179503517}
   GameObjectsToDisable: []
   ComponentsToDisable:
   - {fileID: 1836581308414255224}

@@ -18,6 +18,7 @@ public enum Hand
 
 public class GestureHandler : MonoBehaviour
 {
+    [SerializeField] private PhotonView photonView;
     [SerializeField] Transform _leftHand;
     [SerializeField] Transform _rightHand;
     [SerializeField] GameObject _penPrefab;
@@ -31,6 +32,7 @@ public class GestureHandler : MonoBehaviour
     private Vector3 penRightCorrectPosition = new Vector3(-0.104f, -0.0296f, -0.0252f);
     void Start()
     {
+        print("PhotonNetwork.IsMasterClient: " + PhotonNetwork.IsMasterClient);
         if (PhotonNetwork.IsMasterClient)
         {
             Pens = new List<GameObject>();
