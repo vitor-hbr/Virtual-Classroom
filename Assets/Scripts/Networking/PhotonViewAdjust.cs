@@ -16,10 +16,11 @@ public class PhotonViewAdjust : MonoBehaviour
         {
             disableMyItems();
         }
-        else {
+        else
+        {
             disableOtherPlayersItems();
         }
-        
+
     }
 
     void disableMyItems()
@@ -27,12 +28,18 @@ public class PhotonViewAdjust : MonoBehaviour
         print("Disabling my items");
         foreach (Behaviour component in MyComponentsToDisable)
         {
-            component.enabled = false;
+            if (component != null)
+            {
+                Destroy(component);
+            }
         }
 
         foreach (GameObject gameObject in MyGameObjectsToDisable)
         {
-            gameObject.SetActive(false);
+            if (gameObject != null)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -41,12 +48,18 @@ public class PhotonViewAdjust : MonoBehaviour
         print("Disabling other players items");
         foreach (Behaviour component in OthersComponentsToDisable)
         {
-            component.enabled = false;
+            if (component != null)
+            {
+                Destroy(component);
+            }
         }
 
         foreach (GameObject gameObject in OthersGameObjectsToDisable)
         {
-            gameObject.SetActive(false);
+            if (gameObject != null)
+            {
+                Destroy(gameObject);
+            }
         }
-    }   
+    }
 }
