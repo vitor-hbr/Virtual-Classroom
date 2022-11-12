@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public enum GestureObject
 {
@@ -19,49 +20,70 @@ public class GestureHandler : MonoBehaviour
 {
     [SerializeField] Transform _leftHand;
     [SerializeField] Transform _rightHand;
-    [SerializeField] GameObject _pen;
-    [SerializeField] GameObject _eraser;
-    private GameObject _leftObject;
-    private GameObject _rightObject;
+    [SerializeField] GameObject _penPrefab;
+    [SerializeField] GameObject _eraserPrefab;
+    [SerializeField] public List<GameObject> Pens;
+    [SerializeField] public List<GameObject> Erasers;
+    private Vector3 _hiddenPosition = new Vector3(0, -10, 0);
+    private GestureObject _leftObject = GestureObject.undefined;
+    private GestureObject _rightObject = GestureObject.undefined;
     private Vector3 penLeftCorrectPosition = new Vector3(-0.104f, -0.0296f, 0.0252f);
     private Vector3 penRightCorrectPosition = new Vector3(-0.104f, -0.0296f, -0.0252f);
+    void Start()
+    {
+        Pens = new List<GameObject>();
+        Erasers = new List<GameObject>();
+
+        for (int i = 0; i < 2; i++)
+        {
+            Pens.Add(PhotonNetwork.Instantiate("Pen", new Vector3(0, 0, 0), Quaternion.identity));
+            Erasers.Add(PhotonNetwork.Instantiate("Eraser", new Vector3(0, 0, 0), Quaternion.identity));
+        }
+    }
+
     void Update()
     {
-        if (_leftObject)
+        if (_leftObject == GestureObject.pen)
         {
-
-            //_leftObject.transform.position = _leftHand.position;
+            Pens[0].transform.position = _leftHand.position;
+            Pens[0].transform.rotation = _leftHand.rotation;
+            Pens[0].transform.Rotate(180f, 0f, 0f, Space.Self);
         }
-        if (_rightObject)
+        else if (_leftObject == GestureObject.eraser)
         {
-            //_rightObject.transform.position = _rightHand.position;
-        }
-    }
-
-    public void SpawnObject(GestureObject gestureObject, Hand hand)
-    {
-        if (hand == Hand.Left)
-        {
-            if (_leftObject != null) Destroy(_leftObject);
-            _leftObject = Instantiate(gestureObject == GestureObject.eraser ? _eraser : _pen, penLeftCorrectPosition, Quaternion.identity, _leftHand);
-            _leftObject.transform.Rotate(180f, 0f, 0f, Space.Self);
+            Erasers[0].transform.position = _leftHand.position;
         }
         else
         {
-            if (_rightObject != null) Destroy(_rightObject);
-            _rightObject = Instantiate(gestureObject == GestureObject.eraser ? _eraser : _pen, penRightCorrectPosition, Quaternion.identity, _rightHand);
+            Pens[0].transform.position = _hiddenPosition;
+            Erasers[0].transform.position = _hiddenPosition;
         }
-    }
 
-    public void RemoveObject(GestureObject gestureObject, Hand hand)
-    {
-        if (hand == Hand.Left)
+        if (_rightObject == GestureObject.pen)
         {
-            if (_leftObject != null) Destroy(_leftObject);
+            Pens[1].transform.position = _rightHand.position;
+            Pens[1].transform.rotation = _rightHand.rotation;
+        }
+        else if (_rightObject == GestureObject.eraser)
+        {
+            Erasers[1].transform.position = _rightHand.position;
         }
         else
         {
-            if (_rightObject != null) Destroy(_rightObject);
+            Pens[1].transform.position = _hiddenPosition;
+            Erasers[1].transform.position = _hiddenPosition;
+        }
+    }
+
+    public void PlaceObjectOnHand(GestureObject gestureObject, Hand hand)
+    {
+        if (hand == Hand.Left)
+        {
+            _leftObject = gestureObject;
+        }
+        else
+        {
+            _rightObject = gestureObject;
         }
     }
 }

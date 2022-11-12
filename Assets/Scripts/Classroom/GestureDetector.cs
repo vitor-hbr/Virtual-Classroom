@@ -19,6 +19,7 @@ public class GestureDetector : MonoBehaviour
     public bool debugMode = false;
     public float gestureThreshold = 0.07f;
     private bool _gotBones = false;
+    private bool _gettingBones = false;
     private GestureObject _executingGesture = GestureObject.undefined;
     private Hand _hand;
     void Start()
@@ -37,25 +38,32 @@ public class GestureDetector : MonoBehaviour
             }
             Gesture currentGesture = checkForGesture();
 
+            print(currentGesture.name);
             if (currentGesture.name != GestureObject.undefined)
             {
                 if (_executingGesture == currentGesture.name) return;
 
-                gestureHandler.SpawnObject(currentGesture.name, _hand);
+                gestureHandler.PlaceObjectOnHand(currentGesture.name, _hand);
                 _executingGesture = currentGesture.name;
             }
             else
             {
-                gestureHandler.RemoveObject(currentGesture.name, _hand);
+                gestureHandler.PlaceObjectOnHand(GestureObject.undefined, _hand);
                 _executingGesture = GestureObject.undefined;
             }
+        }
+        else
+        {
+            if (!_gettingBones) StartCoroutine(getBones());
         }
     }
     IEnumerator getBones()
     {
+        _gettingBones = true;
         yield return new WaitForSeconds(2);
-        _gotBones = true;
         fingerBones = new List<OVRBone>(skeleton.Bones);
+        if (fingerBones.Count > 0) _gotBones = true;
+        _gettingBones = false;
     }
     void saveGesture()
     {
@@ -88,7 +96,7 @@ public class GestureDetector : MonoBehaviour
             }
         }
         if (debugMode) print("Closest Match: " + closestMatch.name + " with magnitude: " + lowestMagnitude);
-        if (lowestMagnitude == gestureThreshold)
+        if (lowestMagnitude >= gestureThreshold || lowestMagnitude == 0)
         {
             closestMatch.name = GestureObject.undefined;
         }

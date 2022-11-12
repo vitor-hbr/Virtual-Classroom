@@ -109,6 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5234902557525458076}
   - component: {fileID: 214168849}
+  - component: {fileID: -8095579151022648334}
   m_Layer: 0
   m_Name: Pen
   m_TagString: Untagged
@@ -148,6 +149,29 @@ MonoBehaviour:
   _markerTipHolder: {fileID: 8779825760664447601}
   _markerTip: {fileID: 2397442607263960660}
   _tipSize: 10
+  _tipHeight: 0.1
+--- !u!114 &-8095579151022648334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894793286547858982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &5187388538087325471
 GameObject:
   m_ObjectHideFlags: 0
