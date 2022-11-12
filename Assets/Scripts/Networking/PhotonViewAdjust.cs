@@ -6,27 +6,47 @@ using Photon.Pun;
 public class PhotonViewAdjust : MonoBehaviour
 {
     [SerializeField] private PhotonView photonView;
-    public List<GameObject> GameObjectsToDisable;
-    public List<Behaviour> ComponentsToDisable;
+    public List<GameObject> MyGameObjectsToDisable;
+    public List<Behaviour> MyComponentsToDisable;
+    public List<GameObject> OthersGameObjectsToDisable;
+    public List<Behaviour> OthersComponentsToDisable;
     void Awake()
     {
-        if (!photonView.IsMine)
+        if (photonView.IsMine)
         {
-            disableNonMasterItems();
+            disableMyItems();
         }
+        else {
+            disableOtherPlayersItems();
+        }
+        
     }
 
-    void disableNonMasterItems()
+    void disableMyItems()
     {
-        print("Disabling non master items");
-        foreach (Behaviour component in ComponentsToDisable)
+        print("Disabling my items");
+        foreach (Behaviour component in MyComponentsToDisable)
         {
             component.enabled = false;
         }
 
-        foreach (GameObject gameObject in GameObjectsToDisable)
+        foreach (GameObject gameObject in MyGameObjectsToDisable)
         {
             gameObject.SetActive(false);
         }
     }
+
+    void disableOtherPlayersItems()
+    {
+        print("Disabling other players items");
+        foreach (Behaviour component in OthersComponentsToDisable)
+        {
+            component.enabled = false;
+        }
+
+        foreach (GameObject gameObject in OthersGameObjectsToDisable)
+        {
+            gameObject.SetActive(false);
+        }
+    }   
 }
