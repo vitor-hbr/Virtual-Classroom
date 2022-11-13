@@ -530,7 +530,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: -8719303819620632731}
-  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -775,6 +774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250210750056936186}
+  - component: {fileID: 7296310552327624155}
   m_Layer: 0
   m_Name: Trackers
   m_TagString: Untagged
@@ -800,6 +800,26 @@ Transform:
   m_Father: {fileID: 4010050592792218034}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7296310552327624155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4783140990033576336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c34c37d0f24a45408af7eb9eb5b17ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorObjects:
+  - {fileID: 1836581308420789658}
+  - {fileID: 7256811962142715670}
+  - {fileID: 6831562664212822702}
+  targetObjects:
+  - {fileID: 1673258080540058373}
+  - {fileID: 4095840535605881657}
+  - {fileID: 8386843302413551742}
 --- !u!1 &5480473481464818501
 GameObject:
   m_ObjectHideFlags: 0
