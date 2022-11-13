@@ -552,7 +552,8 @@ MonoBehaviour:
   - {fileID: 8386843302413551742}
   MyComponentsToDisable: []
   OthersGameObjectsToDisable: []
-  OthersComponentsToDisable: []
+  OthersComponentsToDisable:
+  - {fileID: 7296310552327624155}
   MyGameObjectsToEnable:
   - {fileID: 1836581308420789660}
   - {fileID: 7713387490545612611}
