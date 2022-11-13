@@ -20,6 +20,9 @@ public class GestureDetector : MonoBehaviour
     public float gestureThreshold = 0.07f;
     private bool _gotBones = false;
     private bool _gettingBones = false;
+    private bool _gettingGesture = false;
+    private float _getBonesDelay = 2f;
+    private float _gestureDelay = 0.2f;
     private GestureObject _executingGesture = GestureObject.undefined;
     private Hand _hand;
     void Start()
@@ -36,20 +39,17 @@ public class GestureDetector : MonoBehaviour
                 print("Saving Gesture");
                 saveGesture();
             }
+
+            if (_gettingGesture)
+            {
+                return;
+            }
+
             Gesture currentGesture = checkForGesture();
 
-            if (currentGesture.name != GestureObject.undefined)
-            {
-                if (_executingGesture == currentGesture.name) return;
+            if (_executingGesture == currentGesture.name) return;
 
-                gestureHandler.PlaceObjectOnHand(currentGesture.name, _hand);
-                _executingGesture = currentGesture.name;
-            }
-            else
-            {
-                gestureHandler.PlaceObjectOnHand(GestureObject.undefined, _hand);
-                _executingGesture = GestureObject.undefined;
-            }
+            StartCoroutine(getGesture(currentGesture.name));
         }
         else
         {
@@ -59,10 +59,23 @@ public class GestureDetector : MonoBehaviour
     IEnumerator getBones()
     {
         _gettingBones = true;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(_getBonesDelay);
         fingerBones = new List<OVRBone>(skeleton.Bones);
         if (fingerBones.Count > 0) _gotBones = true;
         _gettingBones = false;
+    }
+
+    IEnumerator getGesture(GestureObject newGestureName)
+    {
+        _gettingGesture = true;
+        yield return new WaitForSeconds(_gestureDelay);
+        Gesture currentGesture = checkForGesture();
+        if (newGestureName == currentGesture.name)
+        {
+            gestureHandler.PlaceObjectOnHand(currentGesture.name, _hand);
+            _executingGesture = currentGesture.name;
+        }
+        _gettingGesture = false;
     }
     void saveGesture()
     {
