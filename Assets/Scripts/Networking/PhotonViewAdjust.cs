@@ -10,17 +10,47 @@ public class PhotonViewAdjust : MonoBehaviour
     public List<Behaviour> MyComponentsToDisable;
     public List<GameObject> OthersGameObjectsToDisable;
     public List<Behaviour> OthersComponentsToDisable;
+    public List<GameObject> MyGameObjectsToEnable;
+    public List<Behaviour> MyComponentsToEnable;
+    public List<GameObject> OthersGameObjectsToEnable;
+    public List<Behaviour> OthersComponentsToEnable;
     void Awake()
     {
         if (photonView.IsMine)
         {
             disableMyItems();
+            enableMyItems();
         }
         else
         {
             disableOtherPlayersItems();
+            enableOtherPlayersItems();
         }
 
+    }
+
+    void enableMyItems()
+    {
+        foreach (GameObject item in MyGameObjectsToEnable)
+        {
+            item.SetActive(true);
+        }
+        foreach (Behaviour item in MyComponentsToEnable)
+        {
+            item.enabled = true;
+        }
+    }
+
+    void enableOtherPlayersItems()
+    {
+        foreach (GameObject item in OthersGameObjectsToEnable)
+        {
+            item.SetActive(true);
+        }
+        foreach (Behaviour item in OthersComponentsToEnable)
+        {
+            item.enabled = true;
+        }
     }
 
     void disableMyItems()
@@ -30,7 +60,7 @@ public class PhotonViewAdjust : MonoBehaviour
         {
             if (component != null)
             {
-                Destroy(component);
+                component.enabled = false;
             }
         }
 
@@ -38,7 +68,7 @@ public class PhotonViewAdjust : MonoBehaviour
         {
             if (gameObject != null)
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }
@@ -50,7 +80,7 @@ public class PhotonViewAdjust : MonoBehaviour
         {
             if (component != null)
             {
-                Destroy(component);
+                component.enabled = false;
             }
         }
 
@@ -58,7 +88,7 @@ public class PhotonViewAdjust : MonoBehaviour
         {
             if (gameObject != null)
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }
