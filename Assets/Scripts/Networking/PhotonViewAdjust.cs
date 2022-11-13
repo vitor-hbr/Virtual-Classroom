@@ -68,7 +68,7 @@ public class PhotonViewAdjust : MonoBehaviour
         {
             if (gameObject != null)
             {
-                gameObject.SetActive(false);
+                gameObject.GetComponent<MeshRenderer>().enabled = false;
             }
         }
     }
